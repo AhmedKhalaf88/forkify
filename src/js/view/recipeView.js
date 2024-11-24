@@ -22,6 +22,10 @@ class RecipeView {
     this.#parentEl.insertAdjacentHTML('afterbegin', markup);
   };
 
+  addHandlerRender(handler) {
+    ['hashchange', 'load'].forEach(e => window.addEventListener(e, handler));
+  }
+
   #clear() {
     this.#parentEl.innerHTML = '';
   }
@@ -85,7 +89,9 @@ class RecipeView {
         <div class="recipe__ingredients">
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
-          ${this.#data.ingredients.map(this.#generateMarkupIngredient).join('')}
+          ${this.#data.ingredients
+            ?.map(this.#generateMarkupIngredient)
+            .join('')}
             
           </ul>
         </div>
